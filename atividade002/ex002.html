@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex002</title>
+</head>
+<body>
+    <h1>ex002</h1>
+    <p>Escreva um programa que apresente 2 imagens lado a lado e troque ambas de local quando o usuário clicar em uma delas.</p>
+    <picture>
+        <img src="ex2-img1.jpg" alt="img1" width="400px" height="500px" id="img1">
+        <img src="ex2-img2.png" alt="img2" width="400px" height="500px" id="img2">
+    </picture>
+
+    <script>
+        let trocar = function(){
+            let imagem1 = document.querySelector("#img1")
+            let imagem2 = document.querySelector("#img2")
+            var aux = imagem1.src
+            imagem1.src = imagem2.src
+            imagem2.src = aux
+        }
+
+        window.onload = function(){
+            let img1 = document.querySelector("#img1")
+            let img2 = document.querySelector("#img2")
+
+            img1.addEventListener("click", trocar)
+            img2.addEventListener("click", trocar)
+        }
+    </script>
+</body>
+</html>

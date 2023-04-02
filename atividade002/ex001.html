@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ex001</title>
+</head>
+<body>
+    <h1>ex001</h1>
+    <p>Faça com que quando o usuário digitar um valor em um campo de entrada de texto, o valor digitado seja apresentado em maiúsula em um parágrafo. Além disso, remova todos os números do input deixando apenas os demais caracteres digitados.</p>
+
+    <label for="texto">Escreva aqui: </label>
+    <input type="text" name="texto" id="texto">
+
+    <p id="saida"></p>
+
+    <script>
+        let removeNumeros = function(frase){
+            let aux = ""
+            for(let i = 0; i < frase.length; i++){
+                if(!(frase[i] >= '0' && frase[i] <= '9')){
+                    aux += frase[i]
+                }
+            }
+            return aux.toUpperCase()
+        }
+
+        let removeNumerosEvent = function (event){
+            let txt = event.target
+            txt.value = removeNumeros(txt.value)
+
+            let saida = document.querySelector("#saida")
+            saida.innerText = txt.value
+        }
+
+        window.onload = function(){
+            let texto = document.querySelector("#texto")
+
+            texto.addEventListener('keyup', removeNumerosEvent)
+        }
+    </script>
+</body>
+</html>

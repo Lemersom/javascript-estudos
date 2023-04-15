@@ -1,6 +1,6 @@
 const express = require("express")
 
-const app = express() //server      usar: npm init  npm install  npm start
+const app = express() //server
 
 app.use((req, res, next) =>{
     console.log("Houve uma requisição")
@@ -20,3 +20,10 @@ app.get("/usuario/:user/mostrar", (req, res) =>{
 app.listen(3000, () => {
     console.log("Running on por 3000")
 })
+
+/*Comandos:
+npm init
+npm i express
+npm i nodemon
+nodemon index.js (ou add start no package)
+*/

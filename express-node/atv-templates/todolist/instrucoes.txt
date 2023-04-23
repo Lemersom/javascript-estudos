@@ -1,0 +1,11 @@
+Modifique o projeto de exemplo para incluir um campo de prioridade nas tarefas.
+
+Modifique o modelo, controle e interface para suportar o novo recurso.
+
+As prioridades podem assumir 3 valores:
+
+Baixa
+Média
+Alta
+
+E devem ser representada utilizando as cores, vermelho, amarelo e verde, respectivamente.

@@ -1,0 +1,20 @@
+body {
+  padding: 50px;
+  font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+li{
+  margin-bottom: 10px;
+}
+
+form input{
+  margin-bottom: 15px;
+}
+
+#mudarCor{
+  padding: 2px;
+}

@@ -17,7 +17,7 @@
     <h2>Tarefas</h2>
     <ul>
     {{#tasks}}
-        <li>{{name}} <a href="/?tid={{id}}">edit</a> <a href="/tarefas/del/{{id}}">done</a> - Prioridade: <span id="mudarCor" style="font-variant-caps: all-petite-caps; background-color:{{ cor }}">{{ prioridade }}</span></li>
+        <li>{{name}} <a href="/?tid={{id}}">edit</a> <a href="/tarefas/del/{{id}}">done</a> - Prioridade: <span id="mudarCor" style="background-color:{{ cor }}">{{ prioridade }}</span></li>
     {{/tasks}}
     </ul>
 

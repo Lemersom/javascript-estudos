@@ -16,5 +16,6 @@ form input{
 }
 
 #mudarCor{
+  font-variant-caps: all-petite-caps;
   padding: 2px;
 }

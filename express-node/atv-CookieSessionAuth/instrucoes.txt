@@ -1,0 +1,11 @@
+Crie uma aplicação web com um formulário de login e gerencie o controle de acesso do usuário, a aplicação deve ter as seguintes rotas:
+
+/ - Exibe um formulário de login com usuário e senha
+/login - Recebe um nome de usuário e senha (nome do usuário ao contrário) e realiza o login do usuário
+/logout - Invalida as permissões do usuário
+/intranet - Página restrita que pode ser acessado apenas se o usuário realizou o login adequadamente. A página deve mostrar o nome do usuário na tela e apresentar um formulário para que o mesmo possa alterar o seu nome
+Implemente a mesma atividade utilizando os diferentes mecanismos de controle:
+
+Cookies
+Session
+Passport (opicional)

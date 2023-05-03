@@ -5,6 +5,7 @@ app.get('/', (req, res) => {
     res.render('index')
 })
 
+
 //Cookies
 app.get('/cookies', (req, res) => {
     res.render('cookies')
@@ -13,8 +14,15 @@ app.get('/cookies', (req, res) => {
 app.post('/cookies/login', (req, res) => {
     res.cookie("usuario", req.body.usuario)
     res.cookie("senha", req.body.senha)
-    
-    res.render('login-cookies')
+
+    let reverseSenha = String(req.body.senha).split("").reverse().join("")
+
+    if(reverseSenha != req.body.usuario){
+        res.redirect("/cookies/error")
+    }
+    else{
+        res.render('login-cookies')
+    }
 })
 
 app.get('/cookies/logout', (req, res) => {
@@ -42,7 +50,14 @@ app.post('/session/login', (req, res) => {
     req.session.usuario = req.body.usuario
     req.session.senha = req.body.senha
 
-    res.render('login-session', { usuario: req.session.usuario, senha: req.session.senha})
+    let reverseSenha = String(req.body.senha).split("").reverse().join("")
+
+    if(reverseSenha != req.body.usuario){
+        res.redirect("/session/error")
+    }
+    else{
+        res.render('login-session', { usuario: req.session.usuario, senha: req.session.senha})
+    }
 })
 
 app.get('/session/logout', (req, res) => {
@@ -62,6 +77,50 @@ app.get('/session/intranet', (req, res) => {
 })
 
 
+//Error
+app.get('/cookies/error', (req, res) => {
+    res.clearCookie("usuario")
+    res.clearCookie("senha")
+    res.render('error')
+})
+
+app.get('/session/error', (req, res) => {
+    req.session.usuario = ""
+    req.session.senha = ""
+    res.clearCookie("connect.sid")
+    res.render('error')
+})
+
+
+//Mudar usuário e senha
+app.post('/cookies/intranet-change', (req, res) => {
+    res.cookie("usuario", req.body.usuario)
+    res.cookie("senha", req.body.senha)
+
+    let reverseSenha = String(req.body.senha).split("").reverse().join("")
+
+    if(reverseSenha != req.body.usuario){
+        res.redirect("/cookies/error")
+    }
+    else{
+        res.render('login-cookies')
+    }
+})
+
+
+app.post('/session/intranet-change', (req, res) => {
+    req.session.usuario = req.body.usuario
+    req.session.senha = req.body.senha
+
+    let reverseSenha = String(req.body.senha).split("").reverse().join("")
+
+    if(reverseSenha != req.body.usuario){
+        res.redirect("/session/error")
+    }
+    else{
+        res.render('login-session', { usuario: req.session.usuario, senha: req.session.senha})
+    }
+})
 
 app.listen(3000, () => {
     console.log("Running on port 3000")

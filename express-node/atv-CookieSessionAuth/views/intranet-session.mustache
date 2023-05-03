@@ -12,5 +12,16 @@
             <h1>Usuário está autorizado</h1>
         {{ /senha }}
     {{ /usuario }}
+
+    <h2>Mudar usuário e senha:</h2>
+    <form action="/session/intranet-change" method="post">
+        <label for="usuario">Usuário: </label>
+        <input type="text" name="usuario" id="usuario">
+        <br>
+        <label for="senha">Senha: </label>
+        <input type="password" name="senha" id="senha">
+        <br>
+        <input type="submit" value="Mudar">
+    </form>
 </body>
 </html>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Api Rest Pokemon List</title>
+  </head>
+  <body>
+    <h1>Pokemon Api Rest</h1>
+    <h2>Pokemon</h2>
+    <ul id="pokes">
+
+    </ul>
+
+    <h2>Adicionar Pokemon</h2>
+    <form>
+        <input type="hidden" name="id" id="id">
+        <label for="name">Nome: </label>
+        <input type="text" id="name" name="name"/>
+        <label for="type">Tipo: </label>
+        <input type="text" id="type" name="type"/>
+        <input type="submit" value="Salvar" class="btn-primary"/>
+    </form>
+
+    <script src="javascripts/pokecontrol.js" type="module"></script>
+
+  </body>
+</html>

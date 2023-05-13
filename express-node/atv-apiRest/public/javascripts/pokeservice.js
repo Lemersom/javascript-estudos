@@ -7,11 +7,11 @@ let pokeservice = {
         const response = await fetch('/api/pokemon/' + id)
         return await response.json()
     },
-    inserir: async function(id, name, type) {
+    inserir: async function(name, type) {
         const data = {
             method: 'POST',
             headers: {'Content-type': 'application/json'},
-            body: JSON.stringify({id:id, name:name, type:type})
+            body: JSON.stringify({name:name, type:type})
         }
         const response = await fetch('/api/pokemon', data)
         return await response.json()
@@ -20,7 +20,7 @@ let pokeservice = {
         const data = {
             method: 'PUT',
             headers: {'Content-type': 'application/json'},
-            body: JSON.stringify({id:id, name:name, type:type})
+            body: JSON.stringify({name:name, type:type})
         }
         const response = await fetch('/api/pokemon/'+id, data)
         return await response.json()

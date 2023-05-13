@@ -1,8 +1,5 @@
-let pokes = [
-    {id:1, name:'Bulbasaur', type:'Grass'},
-    {id:2, name:'Ivysaur', type:'Grass-Poison'},
-    {id:3, name:'Venusaur', type:'Grass-Poison'}
-]
+let ids = 0
+let pokes = []
 
 module.exports = {
     listar(){
@@ -17,24 +14,27 @@ module.exports = {
             return validacao
         }
     },
-    inserir(obj){
-        if(obj.id && obj.name && obj.type != undefined){
-            pokes.push(obj)
-            return {status:true, data:obj}
+    inserir(name, type){
+        if(name && type != undefined){
+            let poke = {id:++ids, name:name, type:type}
+            pokes.push(poke)
+            return {status:true, data:poke}
         }
         else{
             return {status:false, data:null, message:"Dados incompletos", error:500}
         }
     },
-    alterar(id, obj){
+    alterar(id, name, type){
         let validacao = this.validarId(id)
         if(validacao != true){
             return validacao
         }
         else{
-            if(obj.id && obj.name && obj.type != undefined){
-                pokes[id-1] = obj
-                return {status:true, data:obj}
+            let i = this.getPositionById(id)
+            if(name && type != undefined){
+                pokes[i].name = name
+                pokes[i].type = type
+                return {status:true, msg:"Alterado com sucesso"}
             }
             else{
                 return {status:false, data:null, message:"Dados incompletos", error:500}
@@ -43,14 +43,23 @@ module.exports = {
     },
     excluir(id){
         let validacao = this.validarId(id)
+        console.log(validacao)
         if(validacao != true){
             return validacao
         }
         else{
-            let obj = pokes[id-1]
-            delete pokes[id-1]
-            return {status:true, data:obj, message:"Removido com sucesso"}
+            let i = this.getPositionById(id)
+            pokes.splice(i, 1)
+            return {status:true, message:"Removido com sucesso"}
         }
+    },
+    getPositionById(id) {
+        for (let i = 0; i<pokes.length; i++) {
+            if (pokes[i].id == id) {
+                return i;
+            }
+        }
+        return -1;
     },
     validarId(id){
         if(id != id || id < 1){

@@ -20,7 +20,7 @@ router.get('/:id', (req, res) => {
 
 //Inserir
 router.post('/', (req, res) => {
-    let insercao = Pokemon.inserir(req.body)
+    let insercao = Pokemon.inserir(req.body.name, req.body.type)
     if(insercao.status == false){
         res.status(insercao.error).json(insercao)
     }
@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
 
 //Alterar
 router.put('/:id', (req, res) => {
-    let alteracao = Pokemon.alterar(parseInt(req.params.id), req.body)
+    let alteracao = Pokemon.alterar(parseInt(req.params.id), req.body.name, req.body.type)
     if(alteracao.status == false){
         res.status(alteracao.error).json(alteracao)
     }

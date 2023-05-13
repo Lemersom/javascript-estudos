@@ -42,16 +42,14 @@ window.addEventListener("load", function() {
 
     document.querySelector("form").addEventListener("submit", async function(evt) {
         evt.preventDefault();
-        let hid = document.querySelector("#id")
-        let hname = document.querySelector("#name")
-        let htype = document.querySelector("#type")
+        let hid = document.querySelector("#tid")
+        let hname = document.querySelector("#tname")
+        let htype = document.querySelector("#ttype")
         let resp;
         if (hid.value) {
             resp = await pokeservice.alterar(hid.value, hname.value, htype.value);
         } else {
-            resp = await pokeservice.inserir(hid.value);
-            resp = await pokeservice.inserir(hname.value);
-            resp = await pokeservice.inserir(htype.value);
+            resp = await pokeservice.inserir(hname.value, htype.value);
         }
         if (resp.status) {
             updateList()

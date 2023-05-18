@@ -1,5 +1,6 @@
 var express = require('express')
 var path = require('path')
+var cookieParser = require('cookie-parser')
 
 var app = express()
 
@@ -13,6 +14,7 @@ app.set('view engine', 'mustache');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var indexRouter = require('./routes/index')

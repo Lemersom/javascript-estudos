@@ -10,38 +10,38 @@
 
 </head>
 <body>
-    <h1>Pokémon List</h1>
-    <h1>Pokémon</h1>
-    <ul id="poke-list">
+    <div class="container m-5">
+        <h1>Pokémon List</h1>
+        <h1>Pokémon</h1>
+        <ul id="poke-list">
         
-    </ul>
+        </ul>
+        <form id="poke-form">
+            <h2>Add Pokemon</h2>
+            <input type="hidden" name="id" id="id-form">
+            <label for="name">Name: </label>
+            <input type="text" name="name" id="name-form">
+            <label for="type">Type: </label>
+            <input type="text" name="type" id="type-form">
+            <input type="submit" value="Add">
+            <br><br>
+            <button type="button" id="logout">Logout</button>
+        </form>
+        <form id="login-form" class="mt-5">
+            <h2>Login</h2>
+            <p id="error-msg"></p>
+            <p>
+                <label for="username-form">Username: </label>
+                <input type="text" name="username" id="username-form">
+            </p>
+            <p>
+                <label for="password-form">Password: </label>
+                <input type="password" name="password-form" id="password-form">
+            </p>
+            <input type="submit" value="Login">
+        </form>
+    </div>
 
-    <form id="poke-form">
-        <h2>Add Pokemon</h2>
-        <input type="hidden" name="id" id="id-form">
-        <label for="name">Name: </label>
-        <input type="text" name="name" id="name-form">
-        <label for="type">Type: </label>
-        <input type="text" name="type" id="type-form">
-        <input type="submit" value="Add">
-        <br><br>
-        <button type="button" id="logout">Logout</button>
-    </form>
-
-    <form id="login-form" class="mt-5">
-        <h2>Login</h2>
-        <p id="error-msg"></p>
-        <p>
-            <label for="username-form">Username: </label>
-            <input type="text" name="username" id="username">
-        </p>
-        <p>
-            <label for="password-form">Password: </label>
-            <input type="password" name="password-form" id="password-form">
-        </p>
-        <input type="submit" value="Login">
-    </form>
-
-    <script src="js/pokecontrol.js"></script>
+    <script src="javascripts/pokecontrol.js" type="module"></script>
 </body>
 </html>

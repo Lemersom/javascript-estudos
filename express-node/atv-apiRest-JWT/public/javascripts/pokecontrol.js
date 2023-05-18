@@ -25,9 +25,9 @@ let updatePokeList = async function(){
                 editBtn.className = "btn btn-link"
                 editBtn.innerHTML = "edit"
                 editBtn.addEventListener("click", () => {
-                    document.querySelector("id-form").value = item.id
-                    document.querySelector("name-form").value = item.name
-                    document.querySelector("type-form").value = item.type
+                    document.querySelector("#id").value = item.id
+                    document.querySelector("#name").value = item.name
+                    document.querySelector("#type").value = item.type
                 })
                 
 
@@ -59,9 +59,9 @@ function updateForms(){
         document.querySelector("form#poke-form").className = 'd-none'
         document.querySelector("form#login-form").className = ''
     }
-    document.querySelector('#id-form').value = ''
-    document.querySelector('#name-form').value = ''
-    document.querySelector('#type-form').value = ''
+    document.querySelector('#id').value = ''
+    document.querySelector('#name').value = ''
+    document.querySelector('#type').value = ''
     document.querySelector('#username-form').value = ''
     document.querySelector('#password-form').value = ''
     document.querySelector('#error-msg').value = ''
@@ -72,9 +72,9 @@ window.addEventListener("load", () => {
 
     document.querySelector("form#poke-form").addEventListener("submit", async (evt) => {
         evt.preventDefault()
-        let hid = document.querySelector("#id-form")
-        let hname = document.querySelector("#name-form")
-        let htype = document.querySelector("#type-form")
+        let hid = document.querySelector("#id")
+        let hname = document.querySelector("#name")
+        let htype = document.querySelector("#type")
         let response;
         if(hid.value){
             response = await pokeService.update(getToken(), hid.value, hname.value, htype.value)

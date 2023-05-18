@@ -59,7 +59,6 @@ router.get('/:id', PokeValidator.validateId, (req, res) => {
 
 // New
 router.post('/', validateToken, PokeValidator.validateName, PokeValidator.validateType, (req, res) => {
-    console.log(`${req.body.name}  ${req.body.type}`)
     res.json({status:true, poke:Pokemon.new(req.body.name, req.body.type)})
 })
 
@@ -75,7 +74,7 @@ router.put('/:id', validateToken, PokeValidator.validateId, PokeValidator.valida
 })
 
 // Delete
-router.delete(':id', validateToken, PokeValidator.validateId, (req, res) => {
+router.delete('/:id', validateToken, PokeValidator.validateId, (req, res) => {
     if(!Pokemon.delete(req.params.id)){
         return res.json({status:false, msg:"Pokémon delete error"})
     }

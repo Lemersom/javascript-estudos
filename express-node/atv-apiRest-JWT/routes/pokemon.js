@@ -1,7 +1,6 @@
 const express = require('express')
 var jwt = require('jsonwebtoken')
 const { token } = require('morgan')
-var PokeValidator = require('../validators/PokeValidator')
 var Pokemon = require('../model/Pokemon')
 var router = express.Router()
 
@@ -25,15 +24,34 @@ function validateToken(req, res, next){
         token_full = ''
     }
     let token = token_full.split(': ')[1]
-    console.log(token)
     jwt.verify(token, '#Abcasdfqwr', (error, payload) => {
         if(error){
-            res.status(404).json({status:false, msg:"Access denied - Invalid token", token:token})
+            console.log(token)
+            res.status(403).json({status:false, msg:"Access denied - Invalid token", token:token})
             return
         }
         req.user = payload.user
         next()
     })
+}
+
+function validateId(req, res, next){
+    let id = req.params.id
+
+    if(!id || id < 0){
+        res.status(403).json({status:false, msg:"ID is invalid"})
+    }
+    next()
+}
+
+function validateBody(req, res, next){
+    let name = req.body.name
+    let type = req.body.type
+
+    if(!name || !type){
+        res.status(403).json({status:false, msg:"Name or Type NULL"})
+    }
+    next()
 }
 
 // List
@@ -48,7 +66,7 @@ router.get('/', (req, res, next) => {
 })
 
 // Search
-router.get('/:id', PokeValidator.validateId, (req, res) => {
+router.get('/:id', validateId, (req, res) => {
     let obj = Pokemon.getElementById(req.params.id)
     if(!obj){
         return res.json({status:false, msg:'Pokémon not found'})
@@ -58,12 +76,12 @@ router.get('/:id', PokeValidator.validateId, (req, res) => {
 })
 
 // New
-router.post('/', validateToken, PokeValidator.validateName, PokeValidator.validateType, (req, res) => {
+router.post('/', validateToken, validateBody, (req, res) => {
     res.json({status:true, poke:Pokemon.new(req.body.name, req.body.type)})
 })
 
 // Update
-router.put('/:id', validateToken, PokeValidator.validateId, PokeValidator.validateName, PokeValidator.validateType, (req, res) => {
+router.put('/:id', validateToken, validateId, validateBody, (req, res) => {
     let obj = Pokemon.update(req.params.id, req.body.name, req.body.type)
     
     if(!obj){
@@ -74,7 +92,7 @@ router.put('/:id', validateToken, PokeValidator.validateId, PokeValidator.valida
 })
 
 // Delete
-router.delete('/:id', validateToken, PokeValidator.validateId, (req, res) => {
+router.delete('/:id', validateToken, validateId, (req, res) => {
     if(!Pokemon.delete(req.params.id)){
         return res.json({status:false, msg:"Pokémon delete error"})
     }

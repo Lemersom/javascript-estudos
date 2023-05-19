@@ -10,7 +10,7 @@ let pokeService = {
     new: async function(token, name, type){
         const data = {
             method: 'POST',
-            headers: {'Content-type': 'aplication/json',
+            headers: {'Content-type': 'application/json',
                       'Authorization': 'Bearer: ' + token},
             body: JSON.stringify({name:name, type:type})
         }
@@ -20,7 +20,7 @@ let pokeService = {
     update: async function(token, id, name, type){
         const data = {
             method: 'PUT',
-            headers: {'Content-type': 'aplication/json',
+            headers: {'Content-type': 'application/json',
                       'Authorization': 'Bearer: ' + token},
             body: JSON.stringify({name:name, type:type})
         }

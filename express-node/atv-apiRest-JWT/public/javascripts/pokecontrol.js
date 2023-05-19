@@ -2,11 +2,12 @@ import pokeService from "./pokeservice.js"
 
 
 function getToken(){
-    return localStorage.getItem('token')
+    return localStorage.getItem("token")
 }
 
 function isLoggedIn(){
-    let token = getToken()
+    let token = localStorage.getItem("token")
+    console.log(`isloggedIn: ${token}`)
     return token ? true : false
 }
 
@@ -82,7 +83,6 @@ window.addEventListener("load", () => {
         else{
             response = await pokeService.new(getToken(), hname.value, htype.value)
         }
-
         if(response.status){
             updatePokeList()
             hid.value = ''

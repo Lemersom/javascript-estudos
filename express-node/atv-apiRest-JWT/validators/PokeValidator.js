@@ -18,23 +18,23 @@ module.exports = {
         return next()
     },
     validateName: function(req, res, next){
-        const {error, value} = PokeSchema.validate(req.body.name)
+        const {error, value} = PokeSchema.validate(req.body)
 
         if (error) {
             return res.json({status: false, msg: "Pokémon name is invalid"})
         }
 
-        req.body.name = value
+        req.body = value
         return next()
     },
     validateType: function(req, res, next){
-        const {error, value} = PokeSchema.validate(req.body.type)
+        const {error, value} = PokeSchema.validate(req.body)
 
         if (error) {
             return res.json({status: false, msg: "Pokémon type is invalid"})
         }
 
-        req.body.type = value
+        req.body = value
         return next()
     }
 }

@@ -25,10 +25,10 @@ function validateToken(req, res, next){
         token_full = ''
     }
     let token = token_full.split(': ')[1]
-
+    console.log(token)
     jwt.verify(token, '#Abcasdfqwr', (error, payload) => {
         if(error){
-            res.status(403).json({status:false, msg:"Access denied - Invalid token"})
+            res.status(404).json({status:false, msg:"Access denied - Invalid token", token:token})
             return
         }
         req.user = payload.user

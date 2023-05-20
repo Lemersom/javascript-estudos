@@ -31,10 +31,8 @@ app.use(session({
 
 //Rotas
 var indexRouter = require('./routes/index')
-var apiRouter = require('./routes/api')
 
 app.use('/', indexRouter)
-app.use('/api/test', apiRouter)
 
 
 module.exports = app

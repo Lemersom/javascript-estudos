@@ -7,10 +7,56 @@
     <title>Prova</title>
 
     <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        .alto { background-color: rgb(231, 87, 87); }
+        .medio { background-color: rgb(253, 253, 86); }
+        .baixo { background-color: rgb(93, 235, 93); }
+    </style>
     
 </head>
 <body>
-    
+    <div class="nova-atividade-div">
+        <p class="nova-atividade-text">Nova atividade: </p>
+        <form action="/tarefas/new" method="post">
+            {{#task.id}}
+            <input type="hidden" name="id" value="{{.}}">
+            {{/task.id}}
+            <input type="text" name="nome" id="nome" placeholder="Tarefa">
+            <select name="situacao" id="situacao">
+                <option>Situação</option>
+                {{#situacao}}
+                <option value={{value}} {{#selected}}selected{{/selected}}>{{nome}}</option>
+                {{/situacao}}
+            </select>
+            <input type="submit" value="Salvar" name="submit" id="submit">
+        </form>
+    </div>
+
+    <h1>Aguardando</h1>
+    <hr>
+    <ul class="ul-aguardando">
+        {{#tasks}}
+        <li><span>{{name}}</span> <a href="tarefas/updt?id={{id}}">iniciar</a></li>
+        {{/tasks}}
+    </ul>
+
+    <h1>Em Andamento</h1>
+    <hr>
+    <ul class="ul-andamento">
+        {{#tasks}}
+        <li id="andamento-prioridade" class="baixo"><span id="mudar-cor">{{name}}</span> <a href="/tarefas/del/{{id}}">concluir</a></li>
+        {{/tasks}}
+    </ul>
+
+    <h1>Finalizados</h1>
+    <hr>
+    <ul class="ul-finalizados">
+        {{#tasks}}
+        <li class="baixo"><span><s>{{name}}</s></span></li>
+        {{/tasks}}
+    </ul>
+
 
     <script src="javascripts/codes.js" type="module"></script>
 </body>

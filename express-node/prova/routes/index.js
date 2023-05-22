@@ -1,5 +1,5 @@
 var express = require('express')
-var Task = require("../model/tasks")
+var Task = require("../model/Tasks")
 var router = express.Router()
 
 
@@ -26,12 +26,11 @@ function validarSituacao(req, res, next){
 
 
 router.get('/', (req, res) => {
-    let obj = Task.getElementById(req.query.tid);
-    let params = { tasks: Task.list(), task: obj}
+    req.session.nome = 'user' //session
+
+    let params = {tasks: Task.list()}
     let situacaoPadrao = '';
-    if (obj){
-        situacaoPadrao = obj.situacao;
-    }
+    
 
     params['situacao'] = [
         {nome:'Aguardando', value:'aguardando', selected:situacaoPadrao == 'aguardando'}, 

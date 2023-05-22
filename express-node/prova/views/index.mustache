@@ -45,7 +45,7 @@
     <hr>
     <ul class="ul-andamento">
         {{#andamento}}
-            <li id="andamento-prioridade" class="baixo"><span id="mudar-cor">{{name}}</span> <a href="/tarefas/del/{{id}}">concluir</a></li>
+            <li id="andamento-prioridade" data-id="{{ id }}" class="baixo"><span id="mudar-cor">{{name}}</span> <a href="/tarefas/del/{{id}}">concluir</a></li>
         {{/andamento}}
     </ul>
 

@@ -1,17 +1,18 @@
 let ids = 0;
 let tasks = [];
 
+let finalizadas = [];
+
 module.exports = {
     new(name, situation) {
         let task = {id: ++ids, name: name, situation: situation};
         tasks.push(task);
         return task;
     },
-    update (id, name, situation) {
+    update (id) {
         let pos = this.getPositionById(id)
         if (pos >= 0) {
-            tasks[pos].name = name;
-            tasks[pos].situation = situation;
+            tasks[pos].situation = 'andamento';
         }
     },
     list() {
@@ -34,28 +35,32 @@ module.exports = {
     },
     delete(id) {
         let i = this.getPositionById(id);
+        finalizadas.push(tasks[i])
         if (i >= 0) {
             tasks.splice(i, 1);
             return true;
         }
         return false; 
     },
-    situationAguardando(id){
-        let pos = this.getElementById(id)
-        if(pos.situacao == "aguardando"){
-            return true
+    tasksAguardando(){
+        let aguardando = []
+        for(let i = 0; i < tasks.length; i++){
+            if(tasks[i].situation == 'aguardando'){
+                aguardando.push(tasks[i])
+            }
         }
-        else{
-            return false
-        }
+        return aguardando
     },
-    situationEspera(id){
-        let pos = this.getElementById(id)
-        if(pos.situacao == "espera"){
-            return true
+    tasksAndamento(){
+        let andamento = []
+        for(let i = 0; i < tasks.length; i++){
+            if(tasks[i].situation == 'andamento'){
+                andamento.push(tasks[i])
+            }
         }
-        else{
-            return false
-        }
+        return andamento
+    },
+    tasksFinalizadas(){
+        return finalizadas
     }
 }

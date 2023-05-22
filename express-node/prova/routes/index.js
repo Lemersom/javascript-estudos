@@ -3,9 +3,31 @@ var Task = require("../model/tasks")
 var router = express.Router()
 
 
+function validarNome(req, res, next){
+    let nome = req.body.nome
+    if(nome && nome.length >= 3){
+        next()
+    }
+    else{
+        res.redirect('/error')
+    }
+}
+
+function validarSituacao(req, res, next){
+    let situacao = req.body.situacao
+    if(situacao == 'aguardando' || situacao == 'andamento'){
+        next()
+    }
+    else{
+        req.body.situacao = 'aguardando'
+        next()
+    }
+}
+
+
 router.get('/', (req, res) => {
     let obj = Task.getElementById(req.query.tid);
-    let params = { tasks: Task.list(), task: obj }
+    let params = { tasks: Task.list(), task: obj}
     let situacaoPadrao = '';
     if (obj){
         situacaoPadrao = obj.situacao;
@@ -13,31 +35,31 @@ router.get('/', (req, res) => {
 
     params['situacao'] = [
         {nome:'Aguardando', value:'aguardando', selected:situacaoPadrao == 'aguardando'}, 
-        {nome:'Andamento', value:'andamento', selected:situacaoPadrao == 'andamento'}, 
+        {nome:'Andamento', value:'andamento', selected:situacaoPadrao == 'andamento'}
     ]
 
-    console.log(obj)
+    params['aguardando'] = Task.tasksAguardando()
+    params['andamento'] = Task.tasksAndamento()
+    params['finalizadas'] = Task.tasksFinalizadas()
+
+
     res.render('index', params)
 })
 
 
-router.post('/tarefas/new', (req, res) => {
-
-    const {id, nome, situacao} = req.body
-
-    if(id === undefined){
-        Task.new(nome, situacao);
-    }
-    else{
-        Task.update(id, nome, situacao);
-    }
-
-    res.redirect('/')
+router.post('/tarefas/new', validarNome, validarSituacao, (req, res) => {
+    var {id, nome, situacao} = req.body
+    
+    Task.new(nome, situacao);
+      
+    res.redirect('/')  
 })
 
 
-router.get('/tarefas/updt', (req, res) => {
-
+router.get('/tarefas/updt/:id', (req, res) => {
+    Task.update(req.params.id)
+    
+    res.redirect('/')
 })
 
 
@@ -45,13 +67,16 @@ router.get('/tarefas/del/:id', (req, res) => {
     const {id} = req.params;
 
     if (!Task.delete(id)) {
-        res.send("Falha ao concluir a tarefa");
-        return;
-      }
-      res.redirect("/");
+        res.redirect('/error');
+    }
+
+    res.redirect("/");
 })
 
 
+router.get('/error', (req, res) => {
+    res.render('error')
+})
 
 
 

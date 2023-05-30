@@ -14,7 +14,7 @@ router.get("/:id", (req, res) => {
     BookDAO.getById(req.params.id).then(book => {
         res.json(sucess(book))
     }).catch(err => {
-        consol.elog(err)
+        console.log(err)
         res.status(500).json(fail("Não foi possível localizar o livro"))
     })
 })

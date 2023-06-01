@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Final</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+    <div class="forms-div">
+        <form id="poke-form">
+            <h2>Add Pokémon</h2>
+            <input type="hidden" name="id" id="id">
+            <label for="name">Name: </label>
+            <input type="text" name="name" id="name">
+            <label for="type">Type: </label>
+            <input type="text" name="type" id="type">
+            <input type="submit" value="Add" id="btn-add">
+            <br><br>
+            <button type="button" id="logout">Logout</button>
+        </form>
+        
+        <form id="login-form">
+            <h2>Login</h2>
+            <p id="error-msg"></p>
+            <p>
+                <label for="username-form">Username: </label>
+                <input type="text" name="username" id="username-form">
+            </p>
+            <p>
+                <label for="password-form">Password: </label>
+                <input type="password" name="password-form" id="password-form">
+            </p>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <div class="pokedex">
+        <h1 class="pokedex-title">Pokédex</h1>
+        <hr>
+        <ul id="poke-list">
+        
+        </ul>
+    </div>
+</body>
+</html>
